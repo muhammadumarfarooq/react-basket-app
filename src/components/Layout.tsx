@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Box, Select, useColorModeValue} from '@chakra-ui/react';
 import SideBar from "./SideBar";
+import Item from "./Item";
 
 function Layout() {
     const [value, setValue] = useState('');
@@ -15,6 +16,7 @@ function Layout() {
                     <option value='Red'>Red</option>
                 </Select>
 
+             <Item />
 
             </Box>
         </Box>
