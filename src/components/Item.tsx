@@ -4,8 +4,10 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
+import {Item as ItemType} from "../types/item";
 
-function Item() {
+function Item({item}: { item: ItemType }) {
+    const {name, price, img} = item;
     return (
         <Stack
             borderWidth="1px"
@@ -17,13 +19,11 @@ function Item() {
             boxShadow='2xl'
             padding={4}
         >
-            <Flex w='136px' bg="blue.200">
+            <Flex w='136px' bg="#f1f1f1">
                 <Image
-                    objectFit="cover"
+                    objectFit="contain"
                     boxSize="100%"
-                    src={
-                        'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-                    }
+                    src={img}
                 />
             </Flex>
             <Stack
@@ -34,10 +34,10 @@ function Item() {
                 pt={2}
             >
                 <Text fontSize='2xl'>
-                    Lindsey James
+                    {name}
                 </Text>
 
-                <Text>£0.00</Text>
+                <Text>£{price}</Text>
             </Stack>
         </Stack>
     );

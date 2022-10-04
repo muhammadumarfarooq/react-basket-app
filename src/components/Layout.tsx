@@ -1,25 +1,29 @@
-import {useState} from 'react';
-import {Box, Select, useColorModeValue} from '@chakra-ui/react';
-import SideBar from "./SideBar";
-import Item from "./Item";
+import useSWR from 'swr'
+import {Alert, AlertIcon, AlertTitle, Spinner, Stack} from '@chakra-ui/react';
+import Items from "./Items";
+
+const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 function Layout() {
-    const [value, setValue] = useState('');
+    const {data, error} = useSWR('https://my-json-server.typicode.com/benirvingplt/products/products', fetcher);
+
+    if (error) return (
+        <Stack align='center' justify='center' py={16} px={4}>
+            <Alert status='error'>
+                <AlertIcon/>
+                <AlertTitle>Something went wrong, try reloading the page</AlertTitle>
+            </Alert>
+        </Stack>
+    );
+
+    if (!data) return (
+        <Stack align='center' justify='center' pt={16} px={4}>
+            <Spinner color='red.500'/>
+        </Stack>
+    );
 
     return (
-        <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-            <SideBar/>
-            <Box mr={96} p="4">
-                <Select placeholder='Colour filter' value={value} onChange={(e) => setValue(e.target.value)}>
-                    <option value='Black'>Black</option>
-                    <option value='Stone'>Stone</option>
-                    <option value='Red'>Red</option>
-                </Select>
-
-             <Item />
-
-            </Box>
-        </Box>
+        <Items items={data}/>
     );
 }
 
