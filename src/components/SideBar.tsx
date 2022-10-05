@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-    Box,
-    Flex,
-} from '@chakra-ui/react';
+import {Box, Divider, Flex, Stack, Text} from "@chakra-ui/react";
 
-const SideBar = () => {
+const SideBar = ({total}: { total: number }) => {
     return (
-        <Box
+        <Stack
             bg='white'
             borderRight="1px"
             borderRightColor='gray.200'
@@ -15,10 +12,14 @@ const SideBar = () => {
             right={0}
             h="full"
         >
-            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-                Cart items
+            <Flex flex={1}>
+
             </Flex>
-        </Box>
+            <Box>
+                <Divider/>
+                <Text textAlign='center' fontWeight='medium' fontSize='4xl'>£{total}</Text>
+            </Box>
+        </Stack>
     );
 };
 
