@@ -17,7 +17,7 @@ function Layout() {
     );
 
     if (!data) return (
-        <Stack align='center' justify='center' pt={16} px={4}>
+        <Stack align='center' justify='center' pt={16} px={4} data-testid="loading-products">
             <Spinner color='red.500'/>
         </Stack>
     );

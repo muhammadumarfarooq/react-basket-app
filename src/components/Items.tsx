@@ -32,7 +32,7 @@ function Items({items}: { items: ItemType[] }) {
                     <option value='Red'>Red</option>
                 </Select>
 
-                <Stack spacing={4} mt={8}>
+                <Stack spacing={4} mt={8} data-testid="products-list">
                     {filteredItems.map((item) => (
                         <Item
                             key={String(item.id)}
