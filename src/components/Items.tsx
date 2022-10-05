@@ -8,31 +8,19 @@ function Items({items}: { items: ItemType[] }) {
     const [filterValue, setFilterValue] = useState('');
     const [cartItems, setCartItems] = useState(items.map((item: ItemType) => ({...item, qty: 0})));
     const filteredItems = useMemo(() => filterItems(cartItems, filterValue), [cartItems, filterValue]);
-
-    const handleIncreaseItemQty = (id: number) => {
-        const updatedCart = cartItems.map(cartItem => {
-            if (cartItem.id === id) {
-                return {...cartItem, qty: cartItem.qty + 1}
-            }
-
-            return cartItem;
-        })
-
-        setCartItems(updatedCart);
-    };
-    const handleDecreaseItemQty = (id: number) => {
-        const updatedCart = cartItems.map(cartItem => {
-            if (cartItem.id === id) {
-                return {...cartItem, qty: cartItem.qty - 1}
-            }
-
-            return cartItem;
-        })
-
-        setCartItems(updatedCart);
-    };
-
     const cartTotal = useMemo(() => getCartTotal(cartItems), [cartItems]);
+
+    const handleUpdateItemQuantity = (id: number, newQuantity: number) => {
+        const updatedCart = cartItems.map(cartItem => {
+            if (cartItem.id === id) {
+                return {...cartItem, qty: newQuantity}
+            }
+
+            return cartItem;
+        })
+
+        setCartItems(updatedCart);
+    };
 
     return (
         <Box minH="100vh" bg='gray.100'>
@@ -49,8 +37,7 @@ function Items({items}: { items: ItemType[] }) {
                         <Item
                             key={String(item.id)}
                             item={item}
-                            handleIncreaseItemQty={handleIncreaseItemQty}
-                            handleDecreaseItemQty={handleDecreaseItemQty}
+                            handleUpdateItemQuantity={handleUpdateItemQuantity}
                         />
                     ))}
                 </Stack>

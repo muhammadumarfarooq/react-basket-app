@@ -14,11 +14,10 @@ import {BiMinus} from "react-icons/bi";
 
 interface ItemProps {
     item: CartItem;
-    handleIncreaseItemQty: (id: number) => void;
-    handleDecreaseItemQty: (id: number) => void;
+    handleUpdateItemQuantity: (id: number, newQuantity: number) => void;
 }
 
-function Item({item, handleIncreaseItemQty, handleDecreaseItemQty}: ItemProps) {
+function Item({item, handleUpdateItemQuantity}: ItemProps) {
     const {name, price, img, qty, id} = item;
 
     return (
@@ -63,11 +62,11 @@ function Item({item, handleIncreaseItemQty, handleDecreaseItemQty}: ItemProps) {
             >
                 <Box>
                     <ButtonGroup size='sm' isAttached variant='outline'>
-                        <IconButton disabled={qty === 0} aria-label='increase item quantity' icon={<BiMinus/>}
-                                    onClick={() => handleDecreaseItemQty(id)}/>
+                        <IconButton disabled={qty === 0} aria-label='decrease item quantity' icon={<BiMinus/>}
+                                    onClick={() => handleUpdateItemQuantity(id, qty - 1)}/>
                         <Button>{qty}</Button>
-                        <IconButton aria-label='decrease item quantity' icon={<BsPlus/>}
-                                    onClick={() => handleIncreaseItemQty(id)}/>
+                        <IconButton aria-label='increase item quantity' icon={<BsPlus/>}
+                                    onClick={() => handleUpdateItemQuantity(id, qty + 1)}/>
                     </ButtonGroup>
                 </Box>
             </Stack>
