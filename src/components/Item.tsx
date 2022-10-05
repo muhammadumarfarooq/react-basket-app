@@ -70,7 +70,7 @@ function Item({item, handleUpdateItemQuantity}: ItemProps) {
                     </ButtonGroup>
                 </Box>
 
-                <Button size='sm' variant='outline'
+                <Button disabled={qty === 0} size='sm' variant='outline'
                         onClick={() => handleUpdateItemQuantity(id, 0)}>Remove</Button>
             </Stack>
         </Stack>
