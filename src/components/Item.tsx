@@ -69,6 +69,9 @@ function Item({item, handleUpdateItemQuantity}: ItemProps) {
                                     onClick={() => handleUpdateItemQuantity(id, qty + 1)}/>
                     </ButtonGroup>
                 </Box>
+
+                <Button size='sm' variant='outline'
+                        onClick={() => handleUpdateItemQuantity(id, 0)}>Remove</Button>
             </Stack>
         </Stack>
     );
