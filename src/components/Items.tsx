@@ -2,7 +2,7 @@ import React, {useState, useMemo} from 'react';
 import {Box, Divider, Select, Stack, Text} from '@chakra-ui/react';
 import {Item as ItemType} from '../types/item';
 import Item from "./Item";
-import {filterItems} from "../utils";
+import {filterItems, getCartTotal} from "../utils";
 
 function Items({items}: { items: ItemType[] }) {
     const [filterValue, setFilterValue] = useState('');
@@ -32,6 +32,8 @@ function Items({items}: { items: ItemType[] }) {
         setCartItems(updatedCart);
     };
 
+    const cartTotal = useMemo(() => getCartTotal(cartItems), [cartItems]);
+
     return (
         <Box minH="100vh" bg='gray.100'>
             <Box mr={96} p="4">
@@ -56,7 +58,7 @@ function Items({items}: { items: ItemType[] }) {
                 <Stack align='flex-end' mt={5}>
                     <Box minWidth='170px'>
                         <Divider borderColor='black'/>
-                        <Text textAlign='center' fontWeight='medium' fontSize='4xl'>£{0}</Text>
+                        <Text textAlign='center' fontWeight='medium' fontSize='4xl'>£{cartTotal}</Text>
                     </Box>
                 </Stack>
             </Box>
