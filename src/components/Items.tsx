@@ -9,6 +9,8 @@ function Items({items}: { items: ItemType[] }) {
     const [cartItems, setCartItems] = useState(items.map((item: ItemType) => ({...item, qty: 0})));
     const filteredItems = useMemo(() => filterItems(cartItems, filterValue), [cartItems, filterValue]);
     const cartTotal = useMemo(() => getCartTotal(cartItems), [cartItems]);
+    const colors = useMemo(() => (items.map(item => item.colour)
+        .filter((value, index, self) => self.indexOf(value) === index)), []);
 
     const handleUpdateItemQuantity = (id: number, newQuantity: number) => {
         const updatedCart = cartItems.map(cartItem => {
@@ -27,9 +29,7 @@ function Items({items}: { items: ItemType[] }) {
             <Box p="4" maxW='768px' mx='auto'>
                 <Select placeholder='Colour filter' value={filterValue} onChange={(e) => setFilterValue(e.target.value)}
                         bg='white'>
-                    <option value='Black'>Black</option>
-                    <option value='Stone'>Stone</option>
-                    <option value='Red'>Red</option>
+                    {colors.map((color) => <option key={color} value={color}>{color}</option>)}
                 </Select>
 
                 <Stack spacing={4} mt={8} data-testid="products-list">
