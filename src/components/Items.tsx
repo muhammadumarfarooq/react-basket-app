@@ -24,7 +24,7 @@ function Items({items}: { items: ItemType[] }) {
 
     return (
         <Box minH="100vh" bg='gray.100'>
-            <Box mr={96} p="4">
+            <Box p="4" maxW='768px' mx='auto'>
                 <Select placeholder='Colour filter' value={filterValue} onChange={(e) => setFilterValue(e.target.value)}
                         bg='white'>
                     <option value='Black'>Black</option>
